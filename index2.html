@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ArchiveWarrior Stats Widget</title>
+  <script>
+    var intervalID;
+
+    window.addEventListener("load", (event) => {
+      function updateMetrics(project, name) {
+        fetch(`https://legacy-api.arpa.li/${project}/stats.json`, {
+          "method": "GET",
+          "headers": {}
+        })
+          .then((res) => res.text())
+          .then((stats) => {
+
+            downloaderArray = new Array();
+            currentDate = new Date().toLocaleString();
+            fullStatData = JSON.parse(stats);
+            if (fullStatData.downloaders.indexOf(name) > 0) {
+              document.getElementById('msg').innerHTML = "";
+              statPlace = document.getElementById("metric");
+
+              for (const [key, value] of Object.entries(fullStatData.downloader_bytes)) {
+                downloaderArray.push({ "name": key, "dl": value });
+              }
+              downloaderArray.sort(function (a, b) {
+                return b.dl - a.dl;
+              });
+              statPos = downloaderArray.findIndex(e => { return (e.name === name) });
+              gigsDL = humanBytes( fullStatData.downloader_bytes[name] );
+              statTotP = fullStatData.downloaders.length;
+              statPlace.innerHTML = `<h2>${name}'s Download Stats</h2>
+									<hr>
+                                    <p>Project Name: <span class=data>${project}</span></p>
+                                    <p>Data Saved: <span class=data>${gigsDL.toLocaleString()}</span></p>
+                                    <p>Items Saved: <span class=data>${fullStatData.downloader_count[name].toLocaleString()}</span></p>
+                                    <p>Position: <span class=data>${statPos} / ${statTotP}</span></p>
+                                    <p>As of: <span class=data>${currentDate}</span></p>`;
+            } else {
+              document.getElementById('msg').innerHTML = `<p>${name} is not listed as a downloader.</p>`;
+            }
+
+
+          })
+          .then(console.log.bind(console))
+          .catch(console.error.bind(console));
+      }
+
+      document.getElementById('lookup').addEventListener('click', function () {
+        if (intervalID){
+          clearInterval(intervalID);
+        }
+        updateMetrics(document.getElementById('projectName').value, document.getElementById('nickName').value);
+        intervalID = setInterval(() => {
+          updateMetrics(document.getElementById('projectName').value, document.getElementById('nickName').value);
+        }, 300000);
+
+      });
+
+      function humanBytes(bytes) {
+        if (bytes > 1024 * 1024 * 1024) {
+          return (Math.round(10 * bytes / (1024 * 1024 * 1024)) / 10) + ' GB';
+        } else if (bytes > 1024 * 1024) {
+          return (Math.round(10 * bytes / (1024 * 1024)) / 10) + ' MB';
+        } else {
+          return (Math.round(10 * bytes / (1024)) / 10) + ' kB';
+        }
+      }
+    });
+  </script>
+<style>
+    #bouton-bas-droite {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+  .window {
+    margin: 0 auto;
+    width: fit-content;
+    max-width: 90%;
+    min-width: 300px;
+	font-family: "Pixelated MS Sans Serif"
+  }
+
+  .window-body {
+    white-space: nowrap;
+    padding: 1rem;
+  }
+
+  #metric:has(h1) {
+    visibility: visible;
+  }
+
+  #metric span.data {
+    position: relative;
+    float: right;
+  }
+  #msg,
+  #userForm {
+    margin: 2rem auto;
+    width: fit-content;
+  }
+
+  #msg {
+    text-align: center;
+    color: rgb(141, 0, 0);
+    font-weight: bold;
+  }
+</style>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/xp.css"
+>
+</head>
+
+<body>
+<div class="title-bar">
+  <div class="title-bar-text">HTML Widget for download stats from Archive Team Warrior (forked by Exorcism)</div>
+  <div class="title-bar-controls">
+    <button aria-label="Close"></button>
+  </div>
+</div>
+<br><br><br>
+<div class="window">
+  <div class="title-bar">
+    <div class="title-bar-text">Download Stats</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="window-body">
+    <div id=metric>
+	</div>
+  </div>
+</div>
+  <div id="userForm">
+    <input id="projectName" type="text" name="projectName" placeholder="Project Name" /> 
+    <input id="nickName" type="text" name="nickName" placeholder="Nickname" /> 
+    <button id="lookup">LookUp Nick</button>
+  </div>
+  <button id="bouton-bas-droite" href="https://github.com/Exorcism0666/archivestats">Credits</button>
+  <div id="msg"></div>
+</body>
+
+</html>
