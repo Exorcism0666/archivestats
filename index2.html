@@ -71,8 +71,12 @@
     });
   </script>
 <style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
 	body {
-		background-image: url('727078-cool-windows-xp-desktop-backgrounds-1920x1080.jpg');
+		background-image: url('background.jpg') !important;
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
@@ -175,7 +179,7 @@
     <label for="radio8">Windows XP</label>
   </div>
    <div class="field-row">
-    <input id="radio7" type="radio" name="second-example">
+    <input id="radio7" type="radio" onclick="window.location.href = 'index3.html';">
     <label for="radio7">macOS</label>
   </div>
 </div>
