@@ -1,109 +1,117 @@
-< !DOCTYPE html > <html>
+<!DOCTYPE html>
+<html>
 
-    <head>
-        <title>ArchiveWarrior Stats Widget</title>
-        <script src="script.js"></script>
-        <style>
-            body {
-            background - color : #008080;
-        }
-            #bouton-bas-droite {
-            position : fixed;
-            bottom : 20 px;
-            right : 20 px;
-            padding : 10 px 20 px;
-            cursor : pointer;
-        }
-            .window {
-            margin : 0 auto;
-            width : fit - content;
-            max - width : 90 %;
-            min - width : 300 px;
-        }
+<head>
+  <title>ArchiveWarrior Stats Widget</title>
+  <script src="script.js"></script>
+  <style>
+    body {
+      background-color: #008080;
+    }
 
-            .window-body {
-            white - space : nowrap;
-            padding : 1 rem;
-        }
+    #bouton-bas-droite {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
 
-            #metric:has(h1) {
-            visibility : visible;
-        }
+    .window {
+      margin: 0 auto;
+      width: fit-content;
+      max-width: 90%;
+      min-width: 300px;
+    }
 
-            #metric span.data {
-            position : relative;
-            float : right;
-        }
-            #msg,
-              #userForm {
-            margin : 2 rem auto;
-            width : fit - content;
-        }
+    .window-body {
+      white-space: nowrap;
+      padding: 1rem;
+    }
 
-            #msg {
-            text - align : center;
-            color : rgb(141, 0, 0);
-            font - weight : bold;
-        }
-            .bottom-left-controls {
-            position : fixed;
-            bottom : 20 px;
-            left : 20 px;
-            background : white;
-            padding : 10 px;
-            border : 1 px solid #dfdfdf;
-            box - shadow : 2 px 2 px 3 px rgba(0, 0, 0, 0.1);
-            z - index : 1000;
-        }
-            .field-row {
-            margin : 5 px 0;
-        } </style>
-        <link rel="stylesheet" href="https://unpkg.com/98.css">
-    </head>
+    #metric:has(h1) {
+      visibility: visible;
+    }
 
-    <body>
-        <div class="title-bar inactive">
-            <div class="title-bar-text">HTML Widget for download stats from Archive Team Warrior (forked by Exorcism)</div>
-            <div class="title-bar-controls">
-                <button aria-label="Close"></button>
-            </div>
-        </div>
-        <br><br><br>
-        <div class="window">
-            <div class="title-bar">
-                <div class="title-bar-text">Download Stats</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Minimize"></button>
-                    <button aria-label="Maximize"></button>
-                    <button aria-label="Close"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <div id="metric"></div>
-            </div>
-        </div>
-        <div id="userForm">
-            <input id="projectName" type="text" name="projectName" placeholder="Project Name"/>
-            <input id="nickName" type="text" name="nickName" placeholder="Nickname"/>
-            <button id="lookup">LookUp Nick</button>
-        </div>
-        <button id="bouton-bas-droite" href="https://github.com/Exorcism0666/archivestats">Credits</button>
-        <div id="msg"></div>
-        <div class="bottom-left-controls">
-            <p>Themes:</p>
-            <div class="field-row">
-                <input checked disabled id="radio8" type="radio" name="second-example">
-                <label for="radio8">Windows 98</label>
-            </div>
-            <div class="field-row">
-                <input id="radio7" type="radio" onclick="window.location.href = 'index2.html';">
-                <label for="radio7">Windows XP</label>
-            </div>
-            <div class="field-row">
-                <input id="radio7" type="radio" onclick="window.location.href = 'index3.html';">
-                <label for="radio7">macOS</label>
-            </div>
-        </div>
-    </body>
+    #metric span.data {
+      position: relative;
+      float: right;
+    }
+
+    #msg,
+    #userForm {
+      margin: 2rem auto;
+      width: fit-content;
+    }
+
+    #msg {
+      text-align: center;
+      color: rgb(141, 0, 0);
+      font-weight: bold;
+    }
+
+    .bottom-left-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 10px;
+      border: 1px solid #dfdfdf;
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .field-row {
+      margin: 5px 0;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+</head>
+
+<body>
+  <div class="title-bar inactive">
+    <div class="title-bar-text">HTML Widget for download stats from Archive Team Warrior (forked by Exorcism)</div>
+    <div class="title-bar-controls">
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Download Stats</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div id=metric>
+      </div>
+    </div>
+  </div>
+  <div id="userForm">
+    <input id="projectName" type="text" name="projectName" placeholder="Project Name" />
+    <input id="nickName" type="text" name="nickName" placeholder="Nickname" />
+    <button id="lookup">LookUp Nick</button>
+  </div>
+  <button id="bouton-bas-droite" href="https://github.com/Exorcism0666/archivestats">Credits</button>
+  <div id="msg"></div>
+  <div class="bottom-left-controls">
+    <p>Themes:</p>
+    <div class="field-row">
+      <input checked disabled id="radio8" type="radio" name="second-example">
+      <label for="radio8">Windows 98</label>
+    </div>
+    <div class="field-row">
+      <input id="radio7" type="radio" onclick="window.location.href = 'index2.html';">
+      <label for="radio7">Windows XP</label>
+    </div>
+    <div class="field-row">
+      <input id="radio7" type="radio" onclick="window.location.href = 'index3.html';">
+      <label for="radio7">macOS</label>
+    </div>
+  </div>
+</body>
 
 </html>
