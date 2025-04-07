@@ -112,6 +112,19 @@
     color: rgb(141, 0, 0);
     font-weight: bold;
   }
+  .bottom-left-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.field-row {
+  margin: 5px 0;
+}
 </style>
   <link
   rel="stylesheet"
@@ -148,6 +161,21 @@
   </div>
   <button id="bouton-bas-droite" href="https://github.com/Exorcism0666/archivestats">Credits</button>
   <div id="msg"></div>
+<div class="bottom-left-controls">
+<p>Themes:</p>
+  <div class="field-row">
+    <input checked disabled id="radio8" type="radio" name="second-example">
+    <label for="radio8">Windows 98</label>
+  </div>
+  <div class="field-row">
+    <input id="radio7" type="radio" onclick="window.location.href = 'index2.html';">
+    <label for="radio7">Windows XP</label>
+  </div>
+   <div class="field-row">
+    <input id="radio7" type="radio" onclick="window.location.href = 'index3.html';">
+    <label for="radio7">macOS</label>
+  </div>
+</div>
 </body>
 
 </html>
